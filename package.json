@@ -10,9 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.10.2",
-    "@astrojs/check": "^0.7.0",
+    "@astrojs/check": "^0.8.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.11.5",
+    "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.3.0+sha256.e1f9e8d1a16607a46dd3c158b5f7a7dc7945501d1c6222d454d63d033d1d918f"
+  "packageManager": "pnpm@9.5.0+sha256.dbdf5961c32909fb030595a9daa1dae720162e658609a8f92f2fa99835510ca5"
 }
