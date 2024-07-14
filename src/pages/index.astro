@@ -1,15 +1,53 @@
 ---
+import Star from '../components/Star.astro';
 
+const stars = [
+  { top: '8%', left: '45%', delay: '0s' },
+  { top: '20%', left: '60%', delay: '0.7s' },
+  { top: '15%', left: '10%', delay: '1.2s' },
+  { top: '30%', left: '25%', delay: '1.8s' },
+  { top: '45%', left: '10%', delay: '0.5s' },
+  // { top: '40%', left: '75%', delay: '0.s' },
+  { top: '20%', left: '80%', delay: '1s' },
+  // { top: '70%', left: '30%', delay: '0.2s' },
+  // { top: '90%', left: '60%', delay: '1.2s' },
+  { top: '50%', left: '90%', delay: '1.5s' },
+  // { top: '90%', left: '5%', delay: '1.2s' },
+];
 ---
+
+<style>
+  .glow {
+    text-shadow: 0 0 10px rgba(34, 255, 94, 0.7);
+  }
+</style>
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Verdi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FIXME: change this when we have an actual icon -->
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <title>Verdi - The Elegant Wayland Compositor</title>
   </head>
-  <body>
-    <h1>Verdi</h1>
+  <body
+    class="flex h-screen items-center justify-center bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 text-white"
+  >
+    <div class="text-center">
+      <h1 class="glow mb-6 text-6xl font-bold">Verdi</h1>
+      <h2 class="glow mb-8 text-xl">The Elegant Wayland Compositor</h2>
+      <a
+        href="https://github.com/verdiwm/verdi"
+        target="_blank"
+        class="relative rounded-full bg-green-500 px-4 py-2 font-bold transition-all duration-300 ease-in-out hover:bg-green-600"
+        >View project on GitHub</a
+      >
+      <h3 class="mt-5 text-gray-400">Coming Soon</h3>
+    </div>
+    {
+      stars.map(({ top, left, delay }) => (
+        <Star top={top} left={left} delay={delay} />
+      ))
+    }
   </body>
 </html>
