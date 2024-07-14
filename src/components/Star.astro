@@ -1,0 +1,30 @@
+---
+interface Props {
+  top: string;
+  left: string;
+  delay: string;
+}
+
+const { top, left, delay } = Astro.props;
+---
+
+<style define:vars={{ left, top, delay }}>
+  div {
+    animation: blink 2s infinite;
+    top: var(--top);
+    left: var(--left);
+    animation-delay: var(--delay);
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+</style>
+
+<div class="absolute h-[2px] w-[2px] rounded-full bg-white"></div>
