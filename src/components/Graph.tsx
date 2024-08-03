@@ -67,8 +67,20 @@ const nodes: Node[] = [
 
   {
     id: 'Kernel',
-    position: { x: 200, y: 400 },
+    position: { x: 175, y: 400 },
     data: { label: 'Kernel' },
+    style: {
+      width: 200,
+      height: 100,
+    },
+  },
+  {
+    id: 'KMS',
+    position: { x: 25, y: 40 },
+    data: { label: 'KMS/DRM' },
+    type: 'input',
+    parentId: 'Kernel',
+    extent: 'parent',
   },
 ];
 
