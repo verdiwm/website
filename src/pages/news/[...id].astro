@@ -1,19 +1,19 @@
 ---
 import Base from '@layouts/Base.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('news');
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { id: post.id },
     props: post,
   }));
 }
 type Props = CollectionEntry<'news'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
