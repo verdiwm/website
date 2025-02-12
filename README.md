@@ -1,22 +1,32 @@
-# Verdi website
+# Verdi Website
 
-This repository contains the source code for https://verdi.rocks/
+Source code for [verdi.rocks](https://verdi.rocks/)
 
-To build locally ensure you have node 20+ installed with corepack enabled
+## Prerequisites
 
-Install depedencies with pnpm
+- [Node.js](https://nodejs.org/) (managed via [Volta](https://volta.sh/))
+- [pnpm](https://pnpm.io/) package manager
+
+## Getting Started
+
+1. Install dependencies:
 
 ```bash
 pnpm install
 ```
 
-Then run the development server with
+2. Start the development server:
 
 ```bash
 pnpm dev
 ```
 
-This will make a development server available at http://localhost:4321
+The site will be available at [http://localhost:4321](http://localhost:4321)
+
+## Development
+
+This website is built using [Astro](https://astro.build/). For documentation and
+guides, visit the [Astro Documentation](https://docs.astro.build/).
 
 ## License
 
