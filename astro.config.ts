@@ -11,7 +11,4 @@ export default defineConfig({
   },
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
-  experimental: {
-    svg: true,
-  },
 });
