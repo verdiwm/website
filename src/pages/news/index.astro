@@ -1,36 +1,82 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+import { SITE_TITLE } from '@/consts';
 import { getCollection } from 'astro:content';
-// import FormattedDate from '@components/FormattedDate.astro';
 import Base from '@/layouts/Base.astro';
 
-const posts = (await getCollection('news')).sort(
+const posts = (await getCollection('news')).toSorted(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section class="mt-10">
-    <h1 class="text-4xl font-bold">Posts</h1>
-    <ul class="divide-y divide-gray-800">
+<Base
+  title={`News — ${SITE_TITLE}`}
+  description="Latest updates from the Verdi project."
+>
+  <section class="relative z-2 px-14 py-28 max-md:px-8">
+    <div class="mx-auto max-w-275">
+      <p
+        class="section-label text-gold mb-[1.4rem] flex items-center gap-4 text-[0.6rem] tracking-[0.38em] uppercase"
+      >
+        Communiqués
+      </p>
+      <h1
+        class="font-display text-paper mb-16 text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black"
+      >
+        From the <em class="text-mist">studio.</em>
+      </h1>
+
       {
-        posts.map((post) => (
-          <li class="py-4">
-            <div class="mb-2 flex items-center">
-              {/* <FormattedDate date={post.data.pubDate} /> */}
-              <a href={`/news/${post.id}/`} class="ml-2 font-bold">
-                {post.data.title}
-              </a>
-            </div>
-            <p class="text-gray-400">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos,
-              quidem? Similique repellendus nam, praesentium quas quasi quo
-              enim, tempora excepturi debitis facere corporis? Quo obcaecati
-              quisquam saepe veniam harum soluta.
-            </p>
-          </li>
-        ))
+        posts.length === 0 && (
+          <p class="font-fell text-mist/50 text-base italic">
+            No dispatches yet — check back soon.
+          </p>
+        )
       }
-    </ul>
+
+      <ul class="divide-sage/15 list-none divide-y">
+        {
+          posts.map((post) => (
+            <li class="reveal py-10">
+              <a
+                href={`/news/${post.id}/`}
+                class="group block cursor-none no-underline"
+              >
+                <time
+                  datetime={post.data.pubDate.toISOString()}
+                  class="text-gold/50 mb-3 block font-mono text-[0.58rem] tracking-[0.22em] uppercase"
+                >
+                  {post.data.pubDate.toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                <h2 class="font-display text-paper group-hover:text-gold mb-3 text-[1.4rem] font-bold tracking-[-0.01em] transition-colors duration-200">
+                  {post.data.title}
+                </h2>
+                <p class="font-fell text-mist/60 text-[0.95rem] leading-[1.9] italic">
+                  {post.data.description}
+                </p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </section>
+
+  <script>
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
 </Base>

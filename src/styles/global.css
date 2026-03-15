@@ -1,1 +1,361 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-ink: #09100a;
+  --color-forest: #111f13;
+  --color-moss: #1e3d23;
+  --color-sage: #3d7549;
+  --color-mist: #8fb998;
+  --color-cream: #ede8de;
+  --color-paper: #f4eedf;
+  --color-gold: #c9a84c;
+  --color-gold-lt: #e8cc80;
+  --color-gold-dim: #7a6230;
+
+  --font-display: 'Playfair Display Variable', serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-fell: 'IM Fell English', serif;
+
+  --animate-fade-up: fadeUp 0.9s ease both;
+  --animate-fade-down: fadeDown 0.8s ease both;
+  --animate-fade-in: fadeIn 1.2s ease both;
+
+  --breakpoint-md: 960px;
+}
+
+/* ─── Keyframes ─── */
+
+@keyframes floatNote {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  6% {
+    opacity: 0.22;
+  }
+  88% {
+    opacity: 0.08;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-105vh) rotate(18deg);
+  }
+}
+
+@keyframes blob {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(3vw, 2vw) scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(90, 148, 104, 0.45);
+  }
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 0 5px rgba(90, 148, 104, 0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ─── Base ─── */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ─── Grain overlay ─── */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ─── Custom cursor JS state ─── */
+
+#cursor.big {
+  transform: translate(-50%, -50%) scale(4);
+  opacity: 0.5;
+}
+
+/* ─── Floating notes (JS-created) ─── */
+
+.note {
+  position: absolute;
+  color: var(--color-gold);
+  opacity: 0;
+  animation: floatNote linear infinite;
+  font-family: serif;
+}
+
+/* ─── Mesh blob pseudo-elements ─── */
+
+.mesh::before {
+  content: '';
+  position: absolute;
+  width: 80vw;
+  height: 80vw;
+  top: -20vw;
+  right: -20vw;
+  background: radial-gradient(
+    circle,
+    rgba(29, 65, 34, 0.3) 0%,
+    transparent 65%
+  );
+  animation: blob 20s ease-in-out infinite alternate;
+}
+
+.mesh::after {
+  content: '';
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  bottom: -10vw;
+  left: -10vw;
+  background: radial-gradient(
+    circle,
+    rgba(14, 40, 18, 0.5) 0%,
+    transparent 65%
+  );
+  animation: blob 26s ease-in-out infinite alternate-reverse;
+}
+
+/* ─── Buttons ─── */
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.82em 2em;
+  border: 1px solid;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    transform 0.18s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
+  z-index: -1;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-primary {
+  background: var(--color-gold);
+  color: var(--color-ink);
+  border-color: var(--color-gold);
+}
+
+.btn-primary::before {
+  background: var(--color-paper);
+}
+
+.btn-primary:hover {
+  color: var(--color-ink);
+  border-color: var(--color-paper);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-mist);
+  border-color: rgba(61, 117, 73, 0.35);
+}
+
+.btn-ghost::before {
+  background: rgba(61, 117, 73, 0.12);
+}
+
+.btn-ghost:hover {
+  color: var(--color-cream);
+  border-color: rgba(61, 117, 73, 0.6);
+}
+
+/* ─── Curtain card corners ─── */
+
+.curtain-card::before {
+  content: '\2726';
+  position: absolute;
+  top: 0.7rem;
+  left: 0.8rem;
+  color: rgba(201, 168, 76, 0.32);
+  font-size: 0.62rem;
+}
+
+.curtain-card::after {
+  content: '\2726';
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  color: rgba(201, 168, 76, 0.32);
+  font-size: 0.62rem;
+}
+
+/* ─── Ornamental rule lines ─── */
+
+.card-orn-rule::before,
+.card-orn-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 168, 76, 0.32),
+    transparent
+  );
+}
+
+/* ─── Section label decoration ─── */
+
+.section-label::before {
+  content: '';
+  flex: none;
+  width: 2rem;
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.4;
+}
+
+/* ─── Feature card hover glow ─── */
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 60% at 30% 30%,
+    rgba(61, 117, 73, 0.08) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.feature-card:hover {
+  background: rgba(17, 31, 19, 0.95);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+/* ─── Code block label ─── */
+
+.code-block-wrap::before {
+  content: 'verdi.corn';
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  background: var(--color-forest);
+  padding: 0 0.5rem;
+  color: rgba(61, 117, 73, 0.5);
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ─── Reveal animation (JS-toggled) ─── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Syntax highlighting ─── */
+
+.tok-comment {
+  color: rgba(61, 117, 73, 0.5);
+}
+
+.tok-head {
+  color: var(--color-mist);
+}
+
+.tok-key {
+  color: var(--color-cream);
+}
+
+.tok-val {
+  color: var(--color-gold-lt);
+}
+
+.tok-str {
+  color: rgba(201, 168, 76, 0.7);
+}
+
+.tok-bool {
+  color: #7fbf8a;
+}

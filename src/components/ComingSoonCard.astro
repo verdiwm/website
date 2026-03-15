@@ -1,0 +1,75 @@
+---
+import Score from '@/components/Score.astro';
+---
+
+<div
+  class="animate-fade-up flex flex-col items-center [animation-delay:0.3s] [animation-duration:0.6s] [animation-timing-function:linear] max-md:items-start"
+>
+  <div
+    class="curtain-card border-gold/26 relative flex w-75 flex-col items-center overflow-hidden border border-t-0 bg-[linear-gradient(160deg,#152a1a_0%,#0f1e12_100%)] px-8 pt-[2.2rem] pb-8 shadow-[0_32px_72px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(201,168,76,0.08)] max-md:w-full max-md:max-w-75"
+  >
+    <span
+      class="text-gold/18 pointer-events-none absolute bottom-[0.7rem] left-[0.8rem] text-[0.62rem]"
+      aria-hidden="true">✦</span
+    >
+    <span
+      class="text-gold/18 pointer-events-none absolute right-[0.8rem] bottom-[0.7rem] text-[0.62rem]"
+      aria-hidden="true">✦</span
+    >
+
+    <p
+      class="text-gold/45 mb-[1.4rem] text-[0.52rem] tracking-[0.3em] uppercase"
+    >
+      Prima Rappresentazione
+    </p>
+
+    <p
+      class="font-display mb-[0.6rem] text-[0.88rem] tracking-[0.12em] text-[rgba(168,201,174,0.45)] italic"
+    >
+      MMXXVI
+    </p>
+
+    <span
+      class="font-display text-mist block text-center text-[0.95rem] font-bold tracking-[0.42em] uppercase"
+      >Coming</span
+    >
+    <span
+      class="font-display text-cream mt-[0.1em] block text-center text-[3.8rem] leading-none font-black tracking-[-0.02em] italic [text-shadow:0_0_50px_rgba(201,168,76,0.15)]"
+      >Soon</span
+    >
+
+    <div
+      class="card-orn-rule my-6 flex w-full items-center gap-[0.6rem]"
+      aria-hidden="true"
+    >
+      <span class="text-gold/50 text-[0.9rem] leading-none">𝄆</span>
+    </div>
+
+    <p class="font-display text-sage text-center text-[1.15rem] italic">
+      Con fuoco
+    </p>
+
+    <div class="mt-[1.8rem] w-full">
+      <Score />
+    </div>
+
+    <div class="mt-6 flex items-center gap-[0.6rem]">
+      <div class="h-px w-5.5 shrink-0 bg-[rgba(90,148,104,0.22)]"></div>
+      <span
+        class="text-[0.52rem] tracking-[0.22em] whitespace-nowrap text-[rgba(90,148,104,0.38)] uppercase"
+        >Atto Primo · MMXXVI</span
+      >
+      <div class="h-px w-5.5 shrink-0 bg-[rgba(90,148,104,0.22)]"></div>
+    </div>
+
+    <div class="mt-4 flex items-center gap-2">
+      <div
+        class="bg-sage h-1.5 w-1.5 shrink-0 animate-[pulse_2.4s_linear_infinite] rounded-full"
+      >
+      </div>
+      <span class="text-sage text-[0.55rem] tracking-[0.2em] uppercase"
+        >In Development</span
+      >
+    </div>
+  </div>
+</div>

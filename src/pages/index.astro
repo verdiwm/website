@@ -1,65 +1,56 @@
 ---
-import Star from '@/components/Star.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
 import Base from '@/layouts/Base.astro';
-
-import DiscordIcon from '@/assets/discord.svg';
-import GithubIcon from '@/assets/github.svg';
-
-const stars = [
-  { top: '8%', left: '45%', delay: '0s' },
-  { top: '35%', left: '70%', delay: '0.7s' },
-  { top: '15%', left: '10%', delay: '1.2s' },
-  { top: '30%', left: '25%', delay: '1.8s' },
-  { top: '45%', left: '10%', delay: '0.5s' },
-  // { top: '40%', left: '75%', delay: '0.s' },
-  { top: '20%', left: '80%', delay: '1s' },
-  // { top: '70%', left: '30%', delay: '0.2s' },
-  // { top: '90%', left: '60%', delay: '1.2s' },
-  { top: '50%', left: '90%', delay: '1.5s' },
-  // { top: '90%', left: '5%', delay: '1.2s' },
-];
+import Cursor from '@/components/Cursor.astro';
+import StaffBackground from '@/components/StaffBackground.astro';
+import FloatingNotes from '@/components/FloatingNotes.astro';
+import MeshBlobs from '@/components/MeshBlobs.astro';
+import HeroLeft from '@/components/HeroLeft.astro';
+import ComingSoonCard from '@/components/ComingSoonCard.astro';
+// import FeaturesSection from '@/components/FeaturesSection.astro';
+// import ConfigSection from '@/components/ConfigSection.astro';
+// import CtaSection from '@/components/CtaSection.astro';
+// import SiteFooter from '@/components/SiteFooter.astro';
 ---
 
-<style>
-  .glow {
-    text-shadow: 0 0 10px rgba(34, 255, 94, 0.7);
-  }
-</style>
+<Base>
+  <Cursor />
+  <MeshBlobs />
+  <StaffBackground />
+  <FloatingNotes />
 
-<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <div
-    class="flex h-full items-center justify-center bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 text-white"
-  >
-    <div class="text-center">
-      <h1 class="glow mb-6 text-6xl font-bold">Verdi</h1>
-      <h2 class="glow mb-8 text-xl">The Elegant Wayland Compositor</h2>
-
-      <div class="grid grid-cols-2 gap-2">
-        <a
-          href="https://github.com/verdiwm/verdi"
-          target="_blank"
-          class="relative rounded-full bg-zinc-900 px-4 py-2 font-bold transition-all duration-300 ease-in-out hover:bg-black"
-        >
-          <GithubIcon class="mr-1 inline-block h-4 w-4" />
-          View on GitHub
-        </a>
-        <a
-          href="https://chat.verdi.rocks"
-          target="_blank"
-          class="relative rounded-full bg-indigo-700 px-4 py-2 font-bold transition-all duration-300 ease-in-out hover:bg-indigo-600"
-        >
-          <DiscordIcon class="mr-1 inline-block h-4 w-4" />
-          Join our Community
-        </a>
-      </div>
-
-      <h3 class="mt-5 text-gray-400">Coming Soon</h3>
+  <div class="z-2 flex min-h-screen">
+    <div
+      class="mx-auto grid w-full max-w-295 grid-cols-[1fr_290px] items-center gap-20 px-14 max-md:grid-cols-1 max-md:px-8"
+    >
+      <HeroLeft />
+      <ComingSoonCard />
     </div>
-    {
-      stars.map(({ top, left, delay }) => (
-        <Star top={top} left={left} delay={delay} />
-      ))
-    }
   </div>
+
+  <!-- 
+
+  TODO: re-add this when we are closer tp lunch
+  
+  <FeaturesSection />
+  <ConfigSection />
+  <CtaSection />
+  <SiteFooter />
+  
+  -->
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
 </Base>
