@@ -8,6 +8,7 @@ export async function GET(context) {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
+    // oxlint-disable-next-line oxc/no-map-spread
     items: posts.map((post) => ({
       ...post.data,
       link: `/news/${post.id}/`,
